@@ -20,7 +20,7 @@ docker volume create rasdata
 # Run the server using our configuration
 #  - 10 users access
 #  - server should be available at: gateway.example.com:2222
-docker run --name ras --rm -v rasdata:/root/keys -e USERS=10 -e HOST="gateway.example.com" -e PORT=2222 -p 2222:22 -d docker-rp-ras
+docker run --name ras -v rasdata:/root/keys -e USERS=10 -e HOST="gateway.example.com" -e PORT=2222 -p 2222:22 -d docker-rp-ras
 ```
 
 Generated keys and known_hosts file will be available in rasdata volume. We can copy them to use them on the clients using:
