@@ -2,15 +2,13 @@
 
 Allows 1-999 users to securely forward two remote ports to this gateway
 
-This server will let clients connect to the server via ssh to forward their ports.
+This server will let clients to connect to it via ssh to forward their ports.
 
 ## Usage
 
 ### Server
 
 Suppose the server is reachable at gateway.example.com on port 2222 and we would like to allow 10 different clients to connect to it.
-
-Generate volume for persistant data:
 
 ```sh
 # Build the server
@@ -23,7 +21,7 @@ docker volume create rasdata
 docker run --name ras -v rasdata:/root/keys -e USERS=10 -e HOST="gateway.example.com" -e PORT=2222 -p 2222:22 -d docker-rp-ras
 ```
 
-Generated keys and known_hosts file will be available in rasdata volume. We can copy them to use them on the clients using:
+Generated keys and known_hosts file will be available in rasdata volume. We can copy them to a folder for later use using:
 
 ```sh
 # Generate a folder to copy RAS data
@@ -65,5 +63,5 @@ Or instead, using a linked container:
 
 ```sh
 docker run --rm --link ras alpine sh
-ssh -p 10003 127.0.0.1
+ssh -p 10003 ras
 ```
