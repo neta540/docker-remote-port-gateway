@@ -44,7 +44,7 @@ add_user()
     USERID=$1
     USER=$(printf "remote%d" "$USERID")
     # create a single user if it doesn't exist
-    ! getent passwd "$USERNAME" > /dev/null && \
+    ! getent passwd "$USER" > /dev/null && \
     (
         PERCENTAGE_VAL=$(echo "scale=4;$USERID/$USER_COUNT*100" | bc) && \
         PERCENTAGE=$(printf "%0.2f%%" "$PERCENTAGE_VAL") && \
@@ -68,8 +68,15 @@ add_user()
         let PORTB="$USERID + $PORTB_OFFSET" && \
         cat "$PUBKEY" >> "$AUTH_KEYS" && 
         chmod 400 "$AUTH_KEYS" && \
-        chown "$USER:$USER" "$AUTH_KEYS" && \
-        echo "
+        chown "$USER:$USER" "$AUTH_KEYS"
+        if [ $? -eq 0 ]; then
+            echo "OK";
+        else
+            echo "FAIL";
+        fi
+        exit 0;
+    )
+    echo "
 Match User $USER
     AllowAgentForwarding no
     PasswordAuthentication no
@@ -81,13 +88,6 @@ Match User $USER
     AllowTcpForwarding remote
     PermitListen 0.0.0.0:$PORTA 0.0.0.0:$PORTB
 " >> /etc/ssh/sshd_config
-        if [ $? -eq 0 ]; then
-            echo "OK";
-        else
-            echo "FAIL";
-        fi
-        exit 0;
-    )
 }
 
 prepare() {
