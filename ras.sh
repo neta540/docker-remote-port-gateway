@@ -64,8 +64,6 @@ add_user()
         chown "$USER:$USER" "$FOLDER" && \
         chmod 500 "$FOLDER" && \
         AUTH_KEYS="$FOLDER/authorized_keys" && \
-        let PORTA="$USERID + $PORTA_OFFSET" && \
-        let PORTB="$USERID + $PORTB_OFFSET" && \
         cat "$PUBKEY" >> "$AUTH_KEYS" && 
         chmod 400 "$AUTH_KEYS" && \
         chown "$USER:$USER" "$AUTH_KEYS"
@@ -76,6 +74,8 @@ add_user()
         fi
         exit 0;
     )
+    let PORTA="$USERID + $PORTA_OFFSET" && \
+    let PORTB="$USERID + $PORTB_OFFSET" && \
     echo "
 Match User $USER
     AllowAgentForwarding no
