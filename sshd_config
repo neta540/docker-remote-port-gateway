@@ -95,8 +95,8 @@ AllowTcpForwarding no
 #UseLogin no
 #PermitUserEnvironment no
 #Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
+ClientAliveInterval 120
+ClientAliveCountMax 3
 #UseDNS no
 #PidFile /run/sshd.pid
 #MaxStartups 10:30:100
