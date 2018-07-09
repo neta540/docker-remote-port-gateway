@@ -28,7 +28,7 @@ generate_sshd_server_keys() {
         done
     fi
     for file in ssh_host_rsa_key ssh_host_dsa_key ssh_host_ecdsa_key ssh_host_ed25519_key; do
-        echo -n "$HOSTNAME:$SELPORT " > "$KEYS_KNOWN_HOSTS/$file.pub"
+        echo -n "[$HOSTNAME]:$SELPORT " > "$KEYS_KNOWN_HOSTS/$file.pub"
         cat "$KEYS_SERVER/$file.pub" >> "$KEYS_KNOWN_HOSTS/$file.pub"
     done
 }
