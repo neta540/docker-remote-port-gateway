@@ -55,13 +55,11 @@ ssh -i [identity] -o UserKnownHostsFile=[known_host_file] -R 0.0.0.0:10003:local
 If we would like to connect to the SSH service of remote3 we can connect to it using:
 
 ```sh
-docker exec -ti ras sh
-ssh -p 10003 127.0.0.1
+docker exec -ti ras ssh -p 10003 127.0.0.1
 ```
 
 Or instead, using a linked container:
 
 ```sh
-docker run --rm --link ras alpine sh
-ssh -p 10003 ras
+docker run --rm --link ras alpine ssh -p 10003 ras
 ```
