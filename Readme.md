@@ -1,6 +1,6 @@
 # Docker reverse port gateway
 
-Allows 1-999 users to securely forward two remote ports to this gateway
+Allows 1-9999 users to securely forward two remote ports to this gateway
 
 This server will let clients to connect to it via ssh to forward their ports.
 
@@ -32,9 +32,9 @@ docker cp ras:/root/keys/. data
 
 Forwarded ports are as follows:
 
-- 10000+UserNumber [1-999]
+- 10000+UserNumber [1-9999]
 
-- 20000+UserNumber [1-999]
+- 20000+UserNumber [1-9999]
 
 So, user remote3 will be allowed to bind only to port 10003 and 20003 on the server.
 
